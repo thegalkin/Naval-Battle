@@ -42,6 +42,8 @@ public class Main {
                     String command = word.substring(0,word.indexOf("%"));
                     System.out.println("Command: " + command);
 
+
+                    //обработка команд клиента
                     String localBody = word.substring(word.indexOf("%")+1);
                     switch (command){
 
@@ -50,7 +52,8 @@ public class Main {
                             out.write(lobbyAnswer.toString());
                             out.flush();
                             break;
-                        
+                        case("game"):
+                            //TODO start a game here with parameters(lobbyCode). It must be previously generated or gained
 
 
 
