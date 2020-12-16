@@ -26,20 +26,27 @@ public class Gameplay extends Application {
 //
 //        MediaPlayer mediaPlayer = new MediaPlayer(soundTheme);
 //        mediaPlayer.autoPlayProperty();
+        Double windowSize = 700.0;
         Double basicSize = 20.0;
-        Double objectMargin = 10.0;
+
         Group targets = new Group();
-        for (int i = 0; i < 100; i++) {
-            Rectangle basicRect = new Rectangle(primaryStage.getWidth()/4 + (basicSize + objectMargin) *i,primaryStage.getHeight()/4 + (basicSize + objectMargin) *i,basicSize,basicSize);
-            Rectangle basicRect = new Rectangle(20.0+basicSize, )
-            basicRect.setFill(Color.rgb(0,0,0));
-            targets.getChildren().add(basicRect);
+        Double marginTop = windowSize / 3;
+        Double marginLeft = marginTop;
+        Double objectMargin = 5.0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                Rectangle basicRect = new Rectangle( marginLeft + (basicSize + objectMargin) *i,marginTop + (basicSize + objectMargin) *j,basicSize,basicSize);
+//            Rectangle basicRect2 = new Rectangle(20.0+basicSize*i, 20.0+basicSize*i, basicSize, basicSize);
+                basicRect.setFill(Color.rgb(0,51,255));
+                targets.getChildren().add(basicRect);
+            }
+
         }
 
-        targets.getChildren().add(new Rectangle(0,0,20,20));
+
         primaryStage.setTitle("Naval Action");
-        primaryStage.setWidth(700);
-        primaryStage.setHeight(700);
+        primaryStage.setWidth(windowSize);
+        primaryStage.setHeight(windowSize);
         Scene scene = new Scene(targets, 0, 0);
         primaryStage.setScene(scene);
         primaryStage.show();
