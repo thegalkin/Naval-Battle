@@ -1,6 +1,9 @@
 package com.company;
 import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
+
+import static java.lang.Thread.sleep;
 
 public class Player {
     private static Socket clientSocket;
@@ -41,26 +44,13 @@ public class Player {
 
                 out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 
-                System.out.println("Вы что-то хотели сказать? Введите это здесь:");
-
-// если соединение произошло и потоки успешно созданы - мы можем
-
-
-//  работать дальше и предложить клиенту что то ввести
+//При старте программы вызываем лобби, чтобы узнать, что делать дальше
+                lobby();
 
 
-// если нет - вылетит исключение
-
-                String word = reader.readLine();
-// ждём пока клиент что-нибудь
-
-
-// не напишет в консоль
-
-                out.write(word + "\n");
 // отправляем сообщение на сервер
 
-                out.flush();
+
                 String serverWord = in.readLine();
 // ждём, что скажет сервер
 
@@ -79,6 +69,44 @@ public class Player {
             System.err.println(e);
         }
 
+    }
+    public static void lobby(){
+        Scanner localScanner = new Scanner(System.in);
+        System.out.println("Do you have lobby-code?(y/n)");
+        String tempInput = localScanner.nextLine();
+        Integer lobbyCode = 0;
+        if(tempInput.equals("y")){
+            System.out.println("Please write your code:");
+            communication(localScanner.nextInt());
+        }else if(tempInput.equals("n")){
+            System.out.println("Generating your code");
+
+            communication(0);
+
+        }else{
+            System.out.println("What do you mean by - \""+tempInput + "\"");
+        }
+
+
+    }
+    public static void communication(Integer lobbyCode){
+
+        // команда отправки кода лобби
+        String command = "lobby";
+        try {
+
+            out.write(command + "%" + lobbyCode + "\n");
+            // отправляем сообщение на сервер
+            out.flush();
+            String serverAnswer = in.readLine();
+            if (serverAnswer.equals("0")){
+                System.out.println("Server send code: " + lobbyCode);
+            }else{
+                System.out.println("Server send code: " + serverAnswer);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
