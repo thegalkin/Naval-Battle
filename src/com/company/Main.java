@@ -5,10 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -134,10 +131,15 @@ public class Main {
         return randomKey.intValue();
     }
 
+
+    //Блок работы с файлами
+
+
+    public static String lobbiesFilePath = "/com.company/resources/lobbies.txt";
     private static HashMap<Integer, ArrayList<String>> lobbiesFileReader(Integer lobbyCode) throws IOException {
-        String usersFilePath = "/com.company/resources/lobbies.txt";
+
         HashMap<Integer, ArrayList<String>> lobbiesHash = new HashMap<>();
-        List<String> tempLobbiesList = Files.readAllLines(Path.of(usersFilePath));
+        List<String> tempLobbiesList = Files.readAllLines(Path.of(lobbiesFilePath));
         if (tempLobbiesList.stream().count() != 0) {
 
             for (String line : tempLobbiesList) {
@@ -151,12 +153,44 @@ public class Main {
     return lobbiesHash;
 
     }
+    private static void lobbiesFileDelete(Integer lobbyCode) throws IOException {
+        File lobbiesFile = new File(lobbiesFilePath);
+        HashMap<Integer, ArrayList<String>> lobbiesHash = lobbiesFileReader(lobbyCode);
+        lobbiesFile.delete();
+
+        Files.createFile(Path.of(lobbiesFilePath));
+        lobbiesFile = new File(lobbiesFilePath);
+        FileWriter fw = new FileWriter(lobbiesFile, true);
+        lobbiesHash.remove(lobbyCode);
+        for (Map.Entry<Integer, ArrayList<String>> entry: lobbiesHash.entrySet()){
+            fw.write(entry.getKey() + ":" + entry.getValue() + "\n");
+        }
+        fw.close();
+
+    }
+
+    private static void lobbiesFileWriterAppend(Integer lobbyCode, ArrayList<String> lobbyMap) throws IOException {
+        File usersFile = new File(lobbiesFilePath);
+        FileWriter fw = new FileWriter(usersFile, true);
+        fw.write(lobbyCode.toString() + ":" + lobbyCode.toString());
+        fw.close();
+
+    }
+
 
     private static ArrayList<String> findMapByLobbyCode(Integer lobbyCode) throws IOException {
         HashMap<Integer, ArrayList<String>> lobbiesHash = lobbiesFileReader(lobbyCode);
         return lobbiesHash.get(lobbyCode);
     }
 
+    private static Integer firstTurn(){
+        Random random = new Random();
+        if (random.nextBoolean()){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 
-    
+
 }
