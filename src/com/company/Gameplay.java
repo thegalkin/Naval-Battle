@@ -12,14 +12,15 @@ import javafx.scene.text.Text;
 import java.util.Scanner;
 
 public class Gameplay extends Application {
-    public void main(String[] args) {
-        launch();
+    public static void main() {
+
+        Application.launch();
 
 
-        setTurnText("new turn text dima krasaua");
-        
+
+
     }
-    Text whoseTurnBanner;
+    Text whoseTurnBanner = new Text(10,20,"whoseTurnText");
 //
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -51,13 +52,13 @@ public class Gameplay extends Application {
             }
 
         }
-//        String whosTurnText = "Yours";
-//        Text whosTurnBanner = new Text(whosTurnText);
+        String whosTurnText = "Yours";
+        whoseTurnBanner.setText("from start");
 
 
 //        whosTurnBanner.setText(whosTurnText);
-        whoseTurnBanner = new Text("Current Text");
-        whoseTurnBanner.setFont(new Font("Roboto", 30));
+//        whoseTurnBanner.setText("Current Text");
+//        whoseTurnBanner.setFont(new Font("Roboto", 30));
         targets.getChildren().add(whoseTurnBanner);
         primaryStage.setTitle("Naval Action");
         primaryStage.setWidth(windowSize);
@@ -67,12 +68,11 @@ public class Gameplay extends Application {
         primaryStage.show();
     }
     public void setTurnText(final String newText) {
-       Platform.runLater( new Runnable() {
-            @Override
-            public void run() {
-                whoseTurnBanner.setText(newText);
-            }
-        });
+       Platform.runLater( () ->
+
+                whoseTurnBanner.setText(newText)
+
+        );
     }
 }
 

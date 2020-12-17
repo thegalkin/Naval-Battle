@@ -1,6 +1,7 @@
 package com.company;
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
@@ -89,6 +90,57 @@ public class Player {
 
 
     }
+   //карту надо нарисовать два раза, потому что их две XD
+    public static void drawMap(ArrayList<String> localMapToDraw){
+        String[] letters = {"A", "B", "C", "D", "E", "F", "G", "I", "J", "K"};
+        System.out.print("   ");
+        for (int j = 0; j < 10; j++) {
+            System.out.print(j + "  ");
+        }
+        for (int i = 0; i < 100; i++) {
+
+            if (i % 10 == 0) {
+                System.out.println();
+                System.out.print(letters[i / 10] + "  ");
+
+            }
+            System.out.print(localMapToDraw.get(i) + "  ");
+        }
+    }
+
+
+    //расстановка кораблей
+    public static void shipPositioning(){
+        System.out.println("Please position your ships");
+        System.out.println("Write like this: D4,D5,I1... ");
+        drawMap();
+
+
+
+
+    }
+//между ходами
+    public static void interTurn(Integer i){
+
+    }
+
+    public static void gaming(){
+        Gameplay gameplay = new Gameplay();
+        gameplay.setTurnText("new text");
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
     public static void communication(Integer lobbyCode){
 
         // команда отправки кода лобби

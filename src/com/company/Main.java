@@ -54,9 +54,16 @@ public class Main {
                             break;
                         case("game"):
                             //TODO start a game here with parameters(lobbyCode). It must be previously generated or gained
+                            try {
+                                Integer lobbyCode = Integer.valueOf(localBody);
+                            }catch (NumberFormatException e){
+                                //Если каким-то образом команда была выполнена без надлежащего кода лобби
+                                System.err.println(e);
+                            }
 
 
 
+                            break;
 
 
 

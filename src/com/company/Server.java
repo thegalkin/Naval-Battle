@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Server {
 
     public static Integer lobby(Integer lobbyCode){
@@ -15,6 +17,15 @@ public class Server {
         return localOutput;
 
     }
+    public static void newGame(){
+        ArrayList<String> serverField1 = new ArrayList<String>();
+        ArrayList<String> serverField2 = new ArrayList<String>();
+        for (int i = 0; i < 100; i++) {
+            serverField1.add(".");
+            serverField2.add(".");
+        }
+    }
+
 
     private static int keygen(){
         Double randomKey = Math.random()*10000*Math.random();
