@@ -73,19 +73,26 @@ public class Player {
     }
     public static void lobby(){
         Scanner localScanner = new Scanner(System.in);
-        System.out.println("Do you have lobby-code?(y/n)");
-        String tempInput = localScanner.nextLine();
-        Integer lobbyCode = 0;
-        if(tempInput.equals("y")){
-            System.out.println("Please write your code:");
-            communication(localScanner.nextInt());
-        }else if(tempInput.equals("n")){
-            System.out.println("Generating your code");
 
-            communication(0);
 
-        }else{
-            System.out.println("What do you mean by - \""+tempInput + "\"");
+        Boolean check = false;
+        while(!check) {
+            System.out.println("Do you have lobby-code?(y/n)");
+            String tempInput = localScanner.nextLine();
+            Integer lobbyCode = 0;
+            if (tempInput.equals("y")) {
+                System.out.println("Please write your code:");
+                communication(localScanner.nextInt());
+                check = true;
+            } else if (tempInput.equals("n")) {
+                System.out.println("Generating your code");
+
+                communication(0);
+                check = true;
+            } else {
+                System.out.println("What do you mean by - \"" + tempInput + "\"\nPlease try again");
+                check = false;
+            }
         }
 
 
