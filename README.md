@@ -1,2 +1,2 @@
 # navalAction
-Недоделанный на 60% клиент-серверный морской бой на сокетах. Java + Javafx. Написан за ночь. 
+Classsical server-client naval battle game. Made in one night with java and javaFX. Making something just before a deadline is a sure thing.
